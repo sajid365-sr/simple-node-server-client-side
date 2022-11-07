@@ -29,9 +29,10 @@ function App() {
     })
     .then(res => res.json())
     .then(backendUser => {
-      // const newUser = [...users, backendUser];
-      // console.log(backendUser)
-      setUser(backendUser);
+      const newUser = [...users, backendUser];
+      
+      setUser(newUser);
+      console.log(backendUser)
 
     })
     .catch(error => console.error(error))
@@ -39,23 +40,6 @@ function App() {
     event.target.reset();
   }
 
-  // const getUser = (event) =>{
-  //   const displayUser = event.target.innerText.split(' ');
-  //   const deleteUser = displayUser[displayUser.length - 1];
-  //   const target = {deleteUser};
-
-  //   fetch('http://localhost:5000/users',{
-  //     method:'DELETE',
-  //     headers:{
-  //       'content-type':'application/json',
-  //     },
-  //     body:JSON.stringify(target)
-  //   })
-  //   .then(res => res.json())
-  //   .then(data => setUser(data))
-  //   .catch(e => console.error(e))
-
-  // }
 
   return (
     <div className="App">
@@ -71,7 +55,8 @@ function App() {
       <h2>Users: {users.length}</h2>
       <div>
         {
-          users.map(singleUser => <p key={singleUser.id}>
+          
+          typeof users !== 'string' && users.map(singleUser => <p key={singleUser._id}>
             {singleUser.name}  {singleUser.email}
             </p>)
         }
